@@ -2,6 +2,7 @@
   <div>
     <h1>設定 - {{ getUserDecoratedName() }}</h1>
     <h3>ユーザ名: {{ userName }}</h3>
+    <h3>パスワード: {{ password }}</h3>
     <v-text-field
       outlined
       hide-details
@@ -13,7 +14,18 @@
         }
       "
     ></v-text-field>
-    <v-btn @click="uploadImage()">アップロード</v-btn>
+    <v-text-field
+      outlined
+      hide-details
+      dense
+      :value="password"
+      @input="
+        (data) => {
+          setPassword(data)
+        }
+      "
+    ></v-text-field>
+    <v-btn @click="addUser()">アップロード</v-btn>
   </div>
 </template>
 
@@ -23,12 +35,12 @@ import { mapActions, mapGetters, mapMutations, mapState } from 'vuex'
 export default {
   name: 'Settings',
   computed: {
-    ...mapState('settings', ['userName']),
+    ...mapState('settings', ['userName', 'password']),
   },
   methods: {
-    ...mapMutations('settings', ['setUserName']),
+    ...mapMutations('settings', ['setUserName', 'setPassword']),
     ...mapGetters('settings', ['getBirthYear', 'getUserDecoratedName']),
-    ...mapActions('settings', ['uploadImage']),
+    ...mapActions('settings', ['addUser']),
   },
 }
 </script>

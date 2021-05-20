@@ -1,11 +1,15 @@
 export const state = () => ({
   userName: 'default User Name',
+  password: '',
   age: 10,
 })
 
 export const mutations = {
   setUserName(state, data) {
     state.userName = data
+  },
+  setPassword(state, data) {
+    state.password = data
   },
 }
 
@@ -14,6 +18,12 @@ export const actions = {
     setTimeout(() => {
       alert('Hi!: ' + state.userName)
     }, 3000)
+  },
+  addUser({ state }) {
+    this.$axios.$post('http://localhost:3000/addUser', {
+      userName: state.userName,
+      password: state.password,
+    })
   },
 }
 
